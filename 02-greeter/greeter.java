@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+//this is a comment
 
 public class greeter {
     public void greet() {
@@ -8,4 +9,4 @@ public class greeter {
     }
 }
 
-//This is a comment
+
