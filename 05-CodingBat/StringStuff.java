@@ -15,7 +15,7 @@ public class StringStuff {
   
 	}
 
-//firstHalf
+//diff21
 	public int diff21(int n) {
    		int absDiff = Math.abs(n - 21);
    		if (n <= 21) {
