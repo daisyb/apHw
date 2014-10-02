@@ -54,4 +54,29 @@ public class Shapes {
         }
         return tri;
     }
+
+    public String tri3(int h){
+	String tri = "";
+	int row = 0;
+	while (row < h){
+	    int space = h - row - 1;
+	    while (space > 0) {
+		tri = tri + " ";
+		space = space - 1;
+	    }
+	    int star = 2 * row + 1;
+	    while (star > 0 ){
+		tri = tri + "*";
+		star = star - 1;
+	    }
+	    row = row + 1;
+	    tri = tri + "\n";
+	}
+
+	return tri;
+    }
+		    
+		    
+		    
+	     
 }
