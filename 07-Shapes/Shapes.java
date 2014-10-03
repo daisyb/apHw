@@ -60,15 +60,11 @@ public class Shapes {
 	String tri = "";
 	int row = 0;
 	while (row < h){
-	    int space = h - row - 1;
-	    while (space > 0) {
+	    for (int space = h - row -1; space > 0; space --) {
 		tri = tri + " ";
-		space = space - 1;
 	    }
-	    int star = 2 * row + 1;
-	    while (star > 0 ){
+	    for (int star = 2*row+1;star > 0; star -- ){
 		tri = tri + "*";
-		star = star - 1;
 	    }
 	    row = row + 1;
 	    tri = tri + "\n";
@@ -85,15 +81,11 @@ public class Shapes {
 	s = s + firstHalf;
 	int numStars = h - 2;
 	while (row < h2){
-	    int space = 0;
-	    while (space <= row) {
+	    for (int space = 0;space <= row;space ++) {
 		s = s + ' ';
-		space = space + 1;
 		}
-	    int star = 0;
-	    while (star < numStars){
+	    for (int star = 0;star < numStars; star ++){
 		s = s + '*';
-		star = star + 1;
 	    }
 	    numStars = numStars - 2;
 	    row = row + 1;
@@ -107,16 +99,12 @@ public class Shapes {
 	String tri = "";
 	int row = 0;
 	int numStars = h;
-	while (row < h){
-	    int space = 0;
-	    while (space <= row){
+	while (row < h){	    
+	    for (int space = 0;space <= row; space ++){
 		tri += ' ';
-		space += 1;
-	    }
-	    int star = 0;
-	    while (star < numStars){
+	    }	    
+	    for (int star = 0;star < numStars;star ++){
 		tri += '*';
-		star += 1;
 	    }
 	    numStars = numStars - 1;
 	    row += 1;
