@@ -1,6 +1,7 @@
 public class Driver {
     public static void main(String[] args){
         Shapes s = new Shapes();
+	Codingbat c = new Codingbat();
 	/*
         System.out.println(s.box(5,4));
         System.out.println(s.box(4,5));
@@ -12,5 +13,7 @@ public class Driver {
 	System.out.println(s.line(5,'*'));
 	*/
 	System.out.println(s.frame(5,4));
+	System.out.println(c.stringSplosion("Code"));
+	System.out.println(c.stringX("xxHxix"));
     }
 }
