@@ -49,6 +49,7 @@ public class Driver {
         player.setName(name);
 	pause(1000);
 	System.out.println("'Mucho gusto "  + name + ". I am a mage. My name is Peter Stuyvesant but you can call me tonight ;)'");
+	pause(1000);
 	System.out.println("'How many kidneys do you have?'*Type a response*");
 	String kidnum = scan.nextLine();
         if (kidnum.equals("2") || (kidnum.toLowerCase()).equals("two")) {
@@ -70,7 +71,7 @@ public class Driver {
 	    gameover = true;
 	}
 	else {
-	    System.out.println("'Fine. Then I'll just have to take them by force!'");
+	    System.out.println("'Fine. Then I'll just have to take them by force!'\n");
 	     pause(2000);
 	    System.out.println("*Initiate battle*");
 	}
@@ -114,7 +115,7 @@ public class Driver {
 		    }
 		    turn = false;
 		}
-		if (move.equals("getstatus")) {
+		if (move.equals("getstatus") || move.equals("status")) {
 		    System.out.println(player.status());
 		    System.out.println(cpu.status());
 		}
@@ -126,7 +127,7 @@ public class Driver {
 		gameover = true;
 	    }
 	    if (turn == false && gameover != true) {
-		pause(2000);
+		pause(1500);
 		double d = Math.random();
 		if (d < .2){
 		    System.out.println(cpu.punch(player));
@@ -143,7 +144,7 @@ public class Driver {
 		    }
 		}
 	    }
-	    pause(2000);
+	    pause(1500);
 
 	    
 	    int hp = player.getHealth();
