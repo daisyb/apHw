@@ -1,4 +1,4 @@
-public class array{
+public class Array{
   
   public int[] frontPiece(int[] nums) {
     if (nums.length < 2){
