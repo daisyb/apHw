@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class Array{
   
   public int[] frontPiece(int[] nums) {
@@ -24,5 +27,18 @@ public class Array{
     }
     return sum;
   }
+
+    public String hundredArray() {
+	Random rand = new Random();
+	int[] hundred = new int[100];
+	String s = "";
+	for (int i = 0; i < 100; i++){
+	    int n = rand.nextInt(75) + 75;
+	    hundred[i] = n;
+	    s += n +", ";
+	}
+	
+	return s;
+    }
 
 }
