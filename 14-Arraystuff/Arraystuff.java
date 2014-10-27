@@ -38,7 +38,7 @@ public class Arraystuff {
 
     }
 
-    public int maVal(){
+    public int maxVal(){
 	int n = 0;
 	for (int i =0; i <a.length; i++){
 	    if (a[i] > n){
@@ -53,10 +53,8 @@ public class Arraystuff {
 	Arraystuff as = new Arraystuff();
 	System.out.println(as);
 	System.out.println();
-	
 	System.out.println(as.find(100));
-	
-	
-	
+	System.out.println(as.maxVal());  
+	System.out.println();	
     }
 }
