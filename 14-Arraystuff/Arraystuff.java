@@ -17,7 +17,7 @@ public class Arraystuff {
     }
     
     public Arraystuff() {
-	this(20);
+	    this(100);
     }
 
     public String toString(){
