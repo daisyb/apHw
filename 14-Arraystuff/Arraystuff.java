@@ -39,7 +39,7 @@ public class Arraystuff {
     }
 
     public int maxVal(){
-	int n = 0;
+	int n = a[0];
 	for (int i =0; i <a.length; i++){
 	    if (a[i] > n){
 		n = a[i];
@@ -48,6 +48,16 @@ public class Arraystuff {
 	return n;
     }
 
+    public int freq(int index){
+	int n = a[index];
+	int count = 0;
+	for (int i = 0;i < a.length;i++){
+	    if (a[i] == n){
+		count += 1;
+	    }
+	}
+	return count;
+    }
 
     public static void main(String[] args) {
 	Arraystuff as = new Arraystuff();
@@ -55,6 +65,7 @@ public class Arraystuff {
 	System.out.println();
 	System.out.println(as.find(100));
 	System.out.println(as.maxVal());  
-	System.out.println();	
+	System.out.println(as.freq(2));	
+	System.out.println(2%10);
     }
 }
