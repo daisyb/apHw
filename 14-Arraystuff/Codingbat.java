@@ -84,19 +84,17 @@ public class Codingbat{
 	return false;
     }
 
-    //not working
     public int[] seriesUp(int n) {
-        int[] ans = new int[n*(n + 1)/2];
-	int count = 1;
+	int[] ans = new int[n*(n + 1)/2];
+	int count = 0;
+	int k = 1;  
 	for (int i = 0; i < ans.length;i++){    
-	    /*
-	      for (int w = 1; w < count + 1;w++){
-	      ans[i] = w;
-	      }*/
-	    if (count == n){
-		return ans;
-	    }
-	    count += 1;
+	    ans[i] = k;
+	    k += 1;
+	    if (i == count){
+		count = count + k;
+		k = 1;
+	    }  
 	}
 	return ans;
     }
