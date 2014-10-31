@@ -98,4 +98,32 @@ public class Codingbat{
 	}
 	return ans;
     }
+    
+    
+    //not working for all tests
+    public int maxMirror(int[] nums) {
+	int newCount = 0;
+	int oldCount = 0;
+	int front;
+	int back;
+	for (int i = 0; i < nums.length;i++){
+	    front=nums[i];
+	    back=nums[nums.length - (i + 1)];
+	    if (front == back){
+		newCount += 1;            
+	    } else {
+		if (newCount > oldCount){
+		    oldCount = newCount;            
+		}
+		newCount = 0;
+           
+	    }
+	}
+	if (newCount > oldCount){
+	    oldCount = newCount;
+	}
+	return oldCount;
+    }
+    
+    
 }
