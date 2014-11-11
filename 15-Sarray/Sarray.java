@@ -7,7 +7,7 @@ public class Sarray {
 
 /*------------ Constructors -------------*/
     public Sarray() {
-	data = new int[10];
+	data = new int[4];
 	length = 0;
     }
 
@@ -23,11 +23,17 @@ public class Sarray {
 
     private void grow() {
 	if (length >= data.length){
-	    int[] newArray = new int[data.length + 5];
+	    int[] newArray = new int[data.length + 10];
 	    for (int i=0;i<data.length;i++) {
 		newArray[i] = data[i];
 	    }
 	    data = newArray;
+	}
+    }
+
+    private void error(int index){
+	if (index >= length){
+	    throw new ArrayIndexOutOfBoundsException();
 	}
     }
 
@@ -41,6 +47,7 @@ public class Sarray {
 
     public void  add(int index, int i){
 	grow();
+	error(index);
 	for(int k = length;k > 0;k--){
 	    if(k > index){
 	        data[k] = data[k -1];
@@ -55,18 +62,21 @@ public class Sarray {
 	return length;
     }
 
-
+   
     public int get(int index) {
+	error(index);
         return data[index];
     }
 
     public int set(int index, int i){
+	error(index);
 	int old = data[index];
 	data[index] = i;
 	return old;
     }
 
     public int remove(int index){
+	error(index);
 	int old = data[index];
 	for(int i = 0;i < length;i++){
 	    if (i >= index){
@@ -81,5 +91,21 @@ public class Sarray {
 /*------------ Main -------------*/
     public static void main(String[] args) {
 	Sarray s = new Sarray();
+	s.add(5);
+	s.add(7);
+	System.out.println(s);
+	s.add(25);
+	s.add(6);
+	System.out.println(s);
+	s.add(2,89);
+	System.out.println(s);
+	try { 
+	    s.add(5,5);
+	    System.out.println("it's all good");
+	} catch (Exception e){
+	    System.out.println("Error: " + e);
+	}
+	System.out.println(s);
+	System.out.println(s.size());
     }
 }
