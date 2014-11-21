@@ -132,6 +132,7 @@ public class WordSearch{
 	w.addWordVF("plant",15,3);
 	// w.addWordH("hello",100,5);
 	// w.addWordH("hello",30,555);
+		
 				
 	System.out.println(w);
     }
