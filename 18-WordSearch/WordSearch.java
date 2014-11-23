@@ -33,7 +33,7 @@ public class WordSearch{
 	r = new Random();
        	int row = r.nextInt(board.length);
 	int col = r.nextInt(board[0].length);
-	boolean again = true;
+	boolean success = true;
 	boolean forward = false;
 	if (r.nextInt(2) == 0){
 	    forward = true;
@@ -43,13 +43,13 @@ public class WordSearch{
 	    try{
 		addWordH(w,row,col,forward);
 	    } catch(Exception UnsupportedOperation) {
-		again = false;
+		success = false;
 	    }
 	} else if (type == 1){
 	    try{
 		addWordV(w,row,col,forward);
 	    } catch(Exception UnsupportedOperation) {
-		again = false;
+		success = false;
 	    }
 	} else {
 	    int direction = r.nextInt(2);
@@ -58,13 +58,13 @@ public class WordSearch{
 		    try{
 			addWordDRF(w,row,col);
 		    } catch(Exception UnsupportedOperation){
-			again = false;
+			success = false;
 		    }
 		} else {
 		    try{
 			addWordDRB(w,row,col);
 		    } catch(Exception UnsupportedOperation){
-			again = false;
+			success = false;
 		    }
 		}
 	    } else {
@@ -72,19 +72,19 @@ public class WordSearch{
 		    try{
 			addWordDLF(w,row,col);
 		    } catch(Exception UnsupportedOperation){
-			again = false;
+			success = false;
 		    }
 		} else {
 		    try{
 			addWordDLB(w,row,col);
 		    } catch(Exception UnsupportedOperation){
-			again = false;
+			success = false;
 		    }
 		}
 	    }
 	}
 		    
-	return again;
+	return success;
     }
 
 	
