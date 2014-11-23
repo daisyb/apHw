@@ -1,10 +1,9 @@
-/**
- * Creates a word search puzzle
- *
- */
-public class WordSearch{
 
+import java.util.*;
+
+public class WordSearch{
     private char[][] board;
+    private Random r;
 
     public WordSearch(int r, int c){
 	board = new char[r][c];
@@ -30,110 +29,278 @@ public class WordSearch{
 	return s;
     }
 
-
-    public void addWord(String w,int row, int col, boolean forward, boolean horizontal){
-	int r = row, c = col;
-	if ((c + w.length()) > board[r].length){
-	    c = c - ((c + w.length()) - board[r].length);
+    public Boolean addWord(String w){
+	r = new Random();
+       	int row = r.nextInt(board.length);
+	int col = r.nextInt(board[0].length);
+	boolean again = true;
+	boolean forward = false;
+	if (r.nextInt(2) == 0){
+	    forward = true;
 	}
-
-	col = c;
-
-	int slen = w.length();
-	for (int i=0; i < slen;i++){
-	   
-	    if (board[r][c] != '.'){
-		if (col <= c){
-		    col = c + 1;
-		    slen +=1;
-		}
-	    
-		char current = board[r][c];
-		int index = 0;
-			Boolean overlap = false;
-		for(int j = 0;j<w.length();j++){
-		     if (w.charAt(j) == current){
-			 if (overlap){
-			     c+=1;
-			     current = board[r][c + 1];
-			 } else {
-			     overlap = true;
-			     current = board[r][c + 1];
-			 }
-			 index = j;
-		     } else if (overlap && current != '.'){
-		     	 overlap = false;
-		     } 
-		}
-	    if (overlap){
-		board[r][c] = '.';
-		col = c - index; 
-	    	break;
-	     }
-	    
+	int type = r.nextInt(3);
+	if (type == 0){
+	    try{
+		addWordH(w,row,col,forward);
+	    } catch(Exception UnsupportedOperation) {
+		again = false;
 	    }
-	    c +=1;
-	}
-	c = col;
-	if (c < 0){
-	    c +=1;
-	}
-	if (horizontal){
-	    if (forward){
-		for (int i=0;i<w.length();i++){
-		    board[r][c] = w.charAt(i);
-		    c++;
-		}
-	    } else{
-		for (int i=w.length() - 1;i>=0;i--){
-		    board[r][c] = w.charAt(i);
-		    c++;
-		}
+	} else if (type == 1){
+	    try{
+		addWordV(w,row,col,forward);
+	    } catch(Exception UnsupportedOperation) {
+		again = false;
 	    }
-	} else{
-	    if (forward){
-		for (int i =0;i<w.length();i++){
-		    board[r][c] = w.charAt(i);
-		    r++;
+	} else {
+	    int direction = r.nextInt(2);
+	    if (direction == 0){
+		if (forward){
+		    try{
+			addWordDRF(w,row,col);
+		    } catch(Exception UnsupportedOperation){
+			again = false;
+		    }
+		} else {
+		    try{
+			addWordDRB(w,row,col);
+		    } catch(Exception UnsupportedOperation){
+			again = false;
+		    }
 		}
 	    } else {
-		System.out.println(c);
-		System.out.println(r);
-		for (int i = w.length() -1;i >=0;i--){
-		    board[r][c] = w.charAt(i);
-		    r++;
+		if (forward){
+		    try{
+			addWordDLF(w,row,col);
+		    } catch(Exception UnsupportedOperation){
+			again = false;
+		    }
+		} else {
+		    try{
+			addWordDLB(w,row,col);
+		    } catch(Exception UnsupportedOperation){
+			again = false;
+		    }
 		}
 	    }
 	}
+		    
+	return again;
     }
- 
-   public void addWordHF(String w,int row, int col){
-	addWord(w,row,col,true,true);
+
+	
+
+    public void overlap(String w, int row,int col, boolean forward){
+	int r = row, c = col;
+	boolean overlap = true;
+        for(int i = 0; i <w.length();i++){
+	    if (board[r][c] != '.'){
+		if (board[r][c] != w.charAt(i)){
+		   throw new UnsupportedOperationException();
+		}
+	    }
+	    if (forward){
+		c++;
+	    } else{
+		r++;
+	    }
+			    
+	}
+       
     }
-    public void addWordHB(String w, int row, int col){
-	addWord(w,row,col,false,true);
+    public void addWordH(String w, int row, int col, boolean forward){
+	int r = row, c = col;
+	if ((c + w.length()) > board[r].length){
+	    c = c - ((c+w.length()) - board[r].length);
+	}
+	overlap(w, r, c,true);
+	if(forward){
+	    for(int i = 0;i<w.length();i++){
+		board[r][c] = w.charAt(i);
+		c++;
+	    }
+	} else {
+	    for(int i = w.length() -1;i >= 0;i--){
+		board[r][c]=w.charAt(i);
+		c++;
+	    }
+	}
     }
-    public void addWordVF(String w, int row,int col){
-	addWord(w,col,row,true,false);
+
+    public void addWordV(String w,int row, int col, boolean forward){
+	int r = row,  c = col;
+	if ((r + w.length()) > board.length){
+	    r = r - ((r + w.length()) - board.length);
+	}
+	if ((c + w.length()) > board[r].length){
+	    c = c - ((c+w.length()) - board[r].length);
+	}
+	overlap(w, r, c,false);
+	if(forward){
+	    for(int i = 0;i<w.length();i++){
+		board[r][c] = w.charAt(i);
+		r++;
+	    }
+	} else {
+	    for(int i = w.length() -1;i >= 0;i--){
+		board[r][c]=w.charAt(i);
+		r++;
+	    }
+	}
     }
-    public void addWordVB(String w, int row, int col){
-	addWord(w,col,row,false,false);
+
+  
+    //diagonal to the right going forward
+     public void addWordDRF(String w, int row, int col){
+	int r=row, c = col;
+	if ((r + w.length()) > board.length){
+	    r = r - ((r + w.length()) - board.length);
+	}
+	if ((c + w.length()) > board[r].length){
+	    c = c - ((c+w.length()) - board[r].length);
+	}
+	col = c;
+	row = r;
+        for(int i = 0; i <w.length();i++){
+	    if (board[r][c] != '.'){
+		if (board[r][c] != w.charAt(i)){
+		     throw new UnsupportedOperationException();
+		}
+	    }
+	    r++;
+	    c++;
+			    
+	}
+	c = col;
+	r =row;
+	for (int i =0;i<w.length();i++){
+	    board[r][c]= w.charAt(i);
+	    r++;
+	    c++;
+	}
     }
-   
+
+    //diagonal to the right goint backward
+    public void addWordDRB(String w, int row, int col){
+    	int r=row, c = col;
+	if ((r + w.length()) > board.length){
+	    r = r - ((r + w.length()) - board.length);
+	}
+	if ((c + w.length()) > board[r].length){
+	    c = c - ((c+w.length()) - board[r].length);
+	}
+	col = c;
+	row = r;
+
+ 	for (int i = w.length()-1;i>=0;i--){
+	    if (board[r][c] != '.'){
+		if (board[r][c] != w.charAt(i)){
+		    throw new  UnsupportedOperationException();
+		}
+	    }    	   
+    	    r++;
+    	    c++;
+    	}
+	c = col;
+	r =row;
+	
+ 	for (int i = w.length()-1;i>=0;i--){
+    	    board[r][c]= w.charAt(i);
+    	    r++;
+    	    c++;
+    	}
+    }
+
+    //diagonal to the left forward
+    public void addWordDLF(String w, int row, int col){
+    	int r=row, c = col;
+
+	if ((r + w.length()) > board.length){
+	    r = r - ((r + w.length()) - board.length);
+	}
+	if ((c + w.length()) > board[r].length){
+	    c = c - ((c+w.length()) - board[r].length);
+	}
+	if((c - w.length())<0){
+	    c= c + w.length() -1;
+	}
+	col = c;
+	row = r;
+
+ 	for (int i = 0; i <w.length();i++){
+	    if (board[r][c] != '.'){
+		if (board[r][c] != w.charAt(i)){
+		    throw new  UnsupportedOperationException();
+		}
+	    }    	   
+    	    r++;
+    	    c--;
+    	}
+	c = col;
+	r =row;
+
+    	for (int i = 0; i <w.length();i++){
+
+    	    board[r][c]= w.charAt(i);
+    	    r++;
+    	    c--;
+    	}
+    }
+  
+    //daigonal to the left backward
+    public void addWordDLB(String w, int row, int col){
+    	int r=row, c = col;
+    	if ((r + w.length()) > board.length){
+    	    r = r - ((r + w.length()) - board.length);
+    	}
+    	if ((c + w.length()) > board[r].length){
+    	    c = c - ((c+w.length()) - board[r].length);
+    	}
+	if ((r - w.length()) < 0){
+	    r = r + w.length() - 1;
+	}
+	col = c;
+	row = r;
+	
+    	for (int i = 0;i<w.length();i++){
+	    if (board[r][c] != '.'){
+		if (board[r][c] != w.charAt(i)){
+		    throw new  UnsupportedOperationException();
+		}
+	    }
+	   
+    	    r--;
+    	    c++;
+    	}
+	c = col;
+	r =row;
+
+    	for (int i =0;i<w.length();i++){
+    	    board[r][c]= w.charAt(i);
+    	    r--;
+    	    c++;
+    	}
+    }
+  
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
-	w.addWordHF("hello",1,3);
-	System.out.println(w);
-	w.addWordHF("look",1,2);
-	w.addWordHF("a",3,8);
-	w.addWordHF("rabbit",3,6);
-	w.addWordHB("bannana",5,20);
-	w.addWordVB("table",4,5);
-	w.addWordVF("plant",15,3);
-	// w.addWordH("hello",100,5);
-	// w.addWordH("hello",30,555);
-		
+	//w.addWordH("hello",1,3,true);
+	//System.out.println(w);
+	//w.addWordH("look",1,0,true);
+	//w.addWordH("a",3,8,true);
+	//w.addWordH("rabbit",3,7,true);
+	//w.addWordH("bannana",5,20,false);
+	//w.addWordV("table",0,20, false);
+	//w.addWordV("pool",20,20, true);
+	//w.addWordH("hello",100,5);
+	//w.addWordH("hello",30,555);
 				
+	//w.addWordDRB("soup",0,0);
+	System.out.println(w.addWord("hello"));
+	System.out.println(w.addWord("look"));
+	System.out.println(w.addWord("pool"));
+	System.out.println(w.addWord("school"));
+
 	System.out.println(w);
     }
+
 }
