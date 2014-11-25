@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class WordSearch{
@@ -88,9 +87,18 @@ public class WordSearch{
     }
 
 	
-	
+    public void fillGrid(){
+	r = new Random();
+	for(int i = 0; i < board.length;i++){
+	    for(int j = 0; j < board[0].length;j++){
+		if (board[i][j] == '.'){
+		    board[i][j] = (char)(97 + r.nextInt(26));
+		}
+	    }
+	}
+    }
 
-    public void overlap(String w, int row,int col, boolean forward){
+    public void overlap(String w, int row,int col, boolean horizontal){
 	int r = row, c = col;
 	boolean overlap = true;
         for(int i = 0; i <w.length();i++){
@@ -99,7 +107,7 @@ public class WordSearch{
 		   throw new UnsupportedOperationException();
 		}
 	    }
-	    if (forward){
+	    if (horizontal){
 		c++;
 	    } else{
 		r++;
@@ -301,6 +309,8 @@ public class WordSearch{
 	System.out.println(w.addWord("pool"));
 	System.out.println(w.addWord("school"));
 
+	System.out.println(w);
+	w.fillGrid();
 	System.out.println(w);
     }
 
