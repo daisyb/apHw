@@ -109,7 +109,7 @@ public class WordSearch{
     public void fillGrid(){
 	r = new Random();
 	for(int i = 0; i < board.length;i++){
-	    for(int j = 0; j < board[0].length;j++){
+	    for(int j = 0; j < board[j].length;j++){
 		if (board[i][j] == '.'){
 		    board[i][j] = (char)(97 + r.nextInt(26));
 		}
