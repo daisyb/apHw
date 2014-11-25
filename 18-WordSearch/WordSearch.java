@@ -21,8 +21,9 @@ public class WordSearch{
 	}
 				
     }
+
     public WordSearch(){
-	this(20,30);
+	this(15,30);
     }
 
     public String toString(){
@@ -68,6 +69,17 @@ public class WordSearch{
 
     public ArrayList<String> getWordBank(){
 	return wordBank;
+    }
+
+    public String printKey(){
+	String s = "";
+	for (int i = 0; i < key.length; i++) {
+	    for (int j = 0; j < key[i].length; j++) {
+		s = s + key[i][j];
+	    }
+	    s = s + "\n";
+	}
+	return s;
     }
     public Boolean addWord(String w){
 	r = new Random();
@@ -133,7 +145,7 @@ public class WordSearch{
 	for(int i = 0; i < board.length;i++){
 	    for(int j = 0; j < board[i].length;j++){
 		if (board[i][j] == '.'){
-		    board[i][j] = (char)(97 + r.nextInt(26));
+		    board[i][j] = (char)('a' + r.nextInt(26));
 		}
 	    }
 	}
@@ -368,8 +380,11 @@ public class WordSearch{
 
 	// System.out.println(w);
 	// w.fillGrid();
-        //w.buildPuzzle;
+        w.buildPuzzle(10);
+
 	System.out.println(w);
+	System.out.println(w.getWordBank());
+	System.out.println(w.printKey());
     }
 
 }
