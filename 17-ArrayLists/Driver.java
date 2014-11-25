@@ -38,24 +38,33 @@ public class Driver{
 	    }
 
 	    int[] newA = new int[a.length];
-	    boolean used;
-	    for(int i = 0; i<a.length;i++){
-	        used = false;
-	        while(used == false){
-		    int index = r.nextInt(a.length);
-		    if (a[index] != -1){
-			newA[i] = a[index];
-			a[index] = -1;
-			used = true;
-		    }
-	        }
+	    // boolean used;
+	    // for(int i = 0; i<a.length;i++){
+	    //     used = false;
+	    //     while(used == false){
+	    // 	    int index = r.nextInt(a.length);
+	    // 	    if (a[index] != -1){
+	    // 		newA[i] = a[index];
+	    // 		a[index] = -1;
+	    // 		used = true;
+	    // 	    }
+	    //     }
+	    // }
+	    int n = 0;
+	    while(n <a.length){
+		int index = r.nextInt(a.length);
+		if (a[index] != -1){
+		    newA[n] = a[index];
+		    a[index] = -1;
+		    n +=1;
+		}
 	    }
 
 	    a = newA;
 
-	    // for (int i=0;i<a.length;i++){
-	    //     System.out.println(i + ": " +a[i]);
-	    // }
+	    for (int i=0;i<a.length;i++){
+	        System.out.println(i + ": " +a[i]);
+	    }
 	}
 
 	/*
@@ -71,6 +80,6 @@ public class Driver{
 
 	  space wise they're probably similar since both are storing two arrays of the same
 	  length, which isn't optimal, but doesn't seem all that bad either.
-        /*
+        */
     }   
 }

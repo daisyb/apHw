@@ -4,12 +4,16 @@ import java.io.*;
 public class WordSearch{
     private Random r;
     private char[][] board;
-    ArrayList<String> words = new ArrayList<String>();
+    private char[][] key;
+    private ArrayList<String> words; 
+    private ArrayList<String> wordBank;
+    
 
-
-
-    public WordSearch(int r, int c){
+   public WordSearch(int r, int c){
+	words =new ArrayList<String>();
+	wordBank = new ArrayList<String>();
 	board = new char[r][c];
+	fillWordList();
 	for (int i = 0; i < board.length; i++) {
 	    for (int j = 0; j < board[i].length; j++) {
 		board[i][j]='.';
@@ -19,7 +23,6 @@ public class WordSearch{
     }
     public WordSearch(){
 	this(20,30);
-	this.makeWordSearch();
     }
 
     public String toString(){
@@ -32,21 +35,40 @@ public class WordSearch{
 	}
 	return s;
     }
-
-    public void makeWordSearch(){
-	fillWordList();
-	for(int i = 0;i<words.size();i++){
-	    String s = words.get(i);
+    
+    public void buildPuzzle(int numWords){ 
+	r = new Random();
+	while(numWords>0){
+	    int wordIndex = r.nextInt(words.size());
+	    String word = words.get(wordIndex);
 	    int tries = 0;
 	    boolean worked = false;
 	    while (tries < 10 && !worked){
-		worked = addWord(s);
+		worked = addWord(word);
 		tries +=1;
 	    }
+	    if (worked){
+		numWords --;
+		words.remove(wordIndex);
+		wordBank.add(word);
+	    }
 	}
+	makeKey();
 	fillGrid();
     }
 
+    private void makeKey(){
+	key = new char[board.length][board[0].length];
+	for(int i = 0;i<board.length;i++){
+	    for(int j =0;j<board[0].length;j++){
+		key[i][j] = board[i][j];
+	    }
+	}
+    }
+
+    public ArrayList<String> getWordBank(){
+	return wordBank;
+    }
     public Boolean addWord(String w){
 	r = new Random();
        	int row = r.nextInt(board.length);
@@ -109,7 +131,7 @@ public class WordSearch{
     public void fillGrid(){
 	r = new Random();
 	for(int i = 0; i < board.length;i++){
-	    for(int j = 0; j < board[j].length;j++){
+	    for(int j = 0; j < board[i].length;j++){
 		if (board[i][j] == '.'){
 		    board[i][j] = (char)(97 + r.nextInt(26));
 		}
@@ -117,7 +139,7 @@ public class WordSearch{
 	}
     }
 
-    public void fillWordList(){
+    private void fillWordList(){
         Scanner sc = null;
 	try {
 	    sc = new Scanner(new File("words.txt"));
@@ -346,7 +368,7 @@ public class WordSearch{
 
 	// System.out.println(w);
 	// w.fillGrid();
-	//w.makeWordSearch();
+        //w.buildPuzzle;
 	System.out.println(w);
     }
 
