@@ -1,8 +1,12 @@
 import java.util.*;
+import java.io.*;
 
 public class WordSearch{
-    private char[][] board;
     private Random r;
+    private char[][] board;
+    ArrayList<String> words = new ArrayList<String>();
+
+
 
     public WordSearch(int r, int c){
 	board = new char[r][c];
@@ -14,7 +18,8 @@ public class WordSearch{
 				
     }
     public WordSearch(){
-	this(10,20);
+	this(20,30);
+	this.makeWordSearch();
     }
 
     public String toString(){
@@ -26,6 +31,20 @@ public class WordSearch{
 	    s = s + "\n";
 	}
 	return s;
+    }
+
+    public void makeWordSearch(){
+	fillWordList();
+	for(int i = 0;i<words.size();i++){
+	    String s = words.get(i);
+	    int tries = 0;
+	    boolean worked = false;
+	    while (tries < 10 && !worked){
+		worked = addWord(s);
+		tries +=1;
+	    }
+	}
+	fillGrid();
     }
 
     public Boolean addWord(String w){
@@ -97,6 +116,22 @@ public class WordSearch{
 	    }
 	}
     }
+
+    public void fillWordList(){
+        Scanner sc = null;
+	try {
+	    sc = new Scanner(new File("words.txt"));
+	} catch (Exception e) {
+	    System.out.println("Can't open file");
+	    System.exit(0);
+	}
+	while (sc.hasNext()) {
+	    String s = sc.next();
+	    words.add(s.toLowerCase());
+	}
+    }
+
+
 
     public void overlap(String w, int row,int col, boolean horizontal){
 	int r = row, c = col;
@@ -304,13 +339,14 @@ public class WordSearch{
 	//w.addWordH("hello",30,555);
 				
 	//w.addWordDRB("soup",0,0);
-	System.out.println(w.addWord("hello"));
-	System.out.println(w.addWord("look"));
-	System.out.println(w.addWord("pool"));
-	System.out.println(w.addWord("school"));
+	// System.out.println(w.addWord("hello"));
+	// System.out.println(w.addWord("look"));
+	// System.out.println(w.addWord("pool"));
+	// System.out.println(w.addWord("school"));
 
-	System.out.println(w);
-	w.fillGrid();
+	// System.out.println(w);
+	// w.fillGrid();
+	//w.makeWordSearch();
 	System.out.println(w);
     }
 
