@@ -183,6 +183,16 @@ public class WordSearch{
 			    
 	}
     }
+
+    public boolean overBoard(int length,int row, int col, boolean horizontal){
+	if (col + length < board[0].length && col  > 0 && horizontal){
+	    return true;
+	} else if (row + length < board.length && row > 0 && !horizontal){
+	    return true;
+	} else {
+	    return false;
+	}
+    }
     public void addWordBetter(String w, int row, int col,boolean forward, boolean horizontal){
         int r  = row, c = col;
 	int rAdd = 0, cAdd =0;
@@ -200,7 +210,7 @@ public class WordSearch{
 	    for(int j =0;j<board[r].length;j++){
 		char current = board[i][j];
 		for(int k=0;k<w.length();k++){
-		    if (j + w.length() - k < board[r].length && j - k > 0){
+		    if (overBoard(w.length(), i - k  , j - k , horizontal)){
                         if(current != '.'){
                             if(w.charAt(k)==current){
 				if(overlap){
@@ -209,8 +219,8 @@ public class WordSearch{
 				}
                                 overlap = true;
 				index = k;
-                                current = board[i + rAdd][j+ cAdd];
-                            } else if (overlap){
+				current = board[i + rAdd][j+ cAdd];
+			    } else if (overlap){
 				overlap = false;
 				break;
 			    }else {
@@ -266,9 +276,7 @@ public class WordSearch{
 	if ((r + w.length()) > board.length){
 	    r = r - ((r + w.length()) - board.length);
 	}
-	if ((c + w.length()) > board[r].length){
-	    c = c - ((c+w.length()) - board[r].length);
-	}
+
 	overlap(w, r, c,false);
 	if(forward){
 	    for(int i = 0;i<w.length();i++){

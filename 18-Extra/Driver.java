@@ -14,11 +14,11 @@ public class Driver {
 	//w.addWordH("hello",30,555);
 				
 	//w.addWordDRB("soup",0,0);
-	System.out.println(w.addWord("hello"));
-	System.out.println(w.addWord("look"));
-	System.out.println(w.addWord("pool"));
+       System.out.println(w.addWord("hello"));
+       System.out.println(w.addWord("look"));
+       System.out.println(w.addWord("pool"));
 
-       //w.addWordV("oo",3,7,true);
+        w.addWordV("oo",9,8,true);
 	System.out.println(w);
 	w.addWordBetter("school",4,7,false,false);
 
