@@ -1,7 +1,7 @@
 public class Driver {
 
    public static void main(String[] args) {
-	WordSearch w = new WordSearch();
+       WordSearch w = new WordSearch(10,20);
 	//w.addWordH("hello",1,3,true);
 	//System.out.println(w);
 	//w.addWordH("look",1,0,true);
@@ -14,11 +14,13 @@ public class Driver {
 	//w.addWordH("hello",30,555);
 				
 	//w.addWordDRB("soup",0,0);
-	System.out.println(w.addWord("hello"));
-	System.out.println(w.addWord("look"));
-	System.out.println(w.addWord("ool"));
+	// System.out.println(w.addWord("hello"));
+	// System.out.println(w.addWord("look"));
+	// System.out.println(w.addWord("pool"));
+
+       w.addWordV("oo",3,7,true);
 	System.out.println(w);
-	w.addWordBetter("school");
+	w.addWordBetter("school",4,7,false,false);
 
 	System.out.println(w);
     }

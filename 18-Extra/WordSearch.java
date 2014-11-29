@@ -183,61 +183,81 @@ public class WordSearch{
 			    
 	}
     }
-    public void addWordBetter(String w){
-        int r  = 0, c = 0;
+    public void addWordBetter(String w, int row, int col,boolean forward, boolean horizontal){
+        int r  = row, c = col;
+	int rAdd = 0, cAdd =0;
         boolean overlap = false;
-        int overlaps = 0;
-            for(int i =0;i<board.length;i++){
-                for(int j =0;j<board[r].length;j++){
-                    char current = board[i][j];
-                    for(int k=0;k<w.length();k++){
-                        if (j + w.length() < board[r].length){
+	int index = 0;
+	if(!forward){
+	    w = new StringBuilder(w).reverse().toString();
+	}
+	if (horizontal){
+	    cAdd = 1;
+	} else {
+	    rAdd = 1;
+	}
+	for(int i =0;i<board.length;i++){
+	    for(int j =0;j<board[r].length;j++){
+		char current = board[i][j];
+		for(int k=0;k<w.length();k++){
+		    if (j + w.length() - k < board[r].length && j - k > 0){
                         if(current != '.'){
                             if(w.charAt(k)==current){
+				if(overlap){
+				    if (horizontal) j +=1;
+				    else i +=1;
+				}
                                 overlap = true;
-                                overlaps +=1;
-                            
-                                current = board[i][j+1];
-                            } else {
+				index = k;
+                                current = board[i + rAdd][j+ cAdd];
+                            } else if (overlap){
+				overlap = false;
+				break;
+			    }else {
                                 overlap = false;
-                                overlaps = 0;
-                            }
+			     }
                         } else if (overlap){
-                            overlaps +=1;
-                            current = board[i][j+1];
+                            current = board[i + rAdd][j+cAdd];
                         }
-                        }
-                    }
-                    if (overlap){
-                        r = i;
-                        c = j;
-                        break;
-                    }
-                }
-                if (overlap){
-                    break;
-                }
+		    }
+		}
+		if (overlap){
+		    if (horizontal){
+			r = i;
+			c = j - index;
+			break;
+		    } else {
+			r = i -index;
+			c = j;
+			break;
+		    }
+		}
+	    }
+	    if (overlap){
+		break;
+	    }
                
-            }
-        addWordH(w,r,c,true);
+	}
         System.out.println("row: " + r + " col:" + c);
+        if (horizontal){
+	    addWordH(w,r,c,true);
+	}else {
+	    addWordV(w,r,c,true);
+	}
+
     }
     public void addWordH(String w, int row, int col, boolean forward){
 	int r = row, c = col;
 	if ((c + w.length()) > board[r].length){
 	    c = c - ((c+w.length()) - board[r].length);
 	}
-	//overlap(w, r, c,true);
-	if(forward){
-	    for(int i = 0;i<w.length();i++){
-		board[r][c] = w.charAt(i);
-		c++;
-	    }
-	} else {
-	    for(int i = w.length() -1;i >= 0;i--){
-		board[r][c]=w.charAt(i);
-		c++;
-	    }
+	overlap(w, r, c,true);
+	if (!forward){
+	    w = new StringBuilder(w).reverse().toString();
+	}
+	for(int i = 0;i<w.length();i++){
+	    board[r][c] = w.charAt(i);
+	    c++;
 	}
     }
 
