@@ -21,7 +21,7 @@ public class Sarray {
 	return s + "]";
     }
 
-    private void grow() {
+    public void grow() {
 	if (length >= data.length){
 	    String[] newArray = new String[data.length + 10];
 	    for (int i=0;i<data.length;i++) {
@@ -30,12 +30,13 @@ public class Sarray {
 	    data = newArray;
 	}
     }
-
+    
     private void error(int index){
 	if (index >= length){
-	    throw new ArrayIndexOutOfBoundsException();
+	    //throw new ArrayIndexOutOfBoundsException();
 	}
     }
+    
 
     public boolean add(String s) {
 	grow();
@@ -48,7 +49,7 @@ public class Sarray {
     public void  add(int index, String s){
 	grow();
 	error(index);
-	for(int k = length;k > 0;k--){
+	for(int k = length;k >= 0;k--){
 	    if(k > index){
 	        data[k] = data[k -1];
 	    } else if (k == index){
@@ -56,6 +57,7 @@ public class Sarray {
 		length +=1;
 	    }
 	 }
+	
     }
     
     public int size() {
@@ -87,7 +89,14 @@ public class Sarray {
 	return old;	
     }
 
+    public String[] getData(){
+	return data;
+    }
 
+    public int getLength(){
+	return length;
+    }
+    
 /*------------ Main -------------*/
     public static void main(String[] args) {
 	Sarray s = new Sarray();
