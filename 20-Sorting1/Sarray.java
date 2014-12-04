@@ -107,7 +107,6 @@ public class Sarray {
 	for(int i =0;i<data.length;i++){
 	    int minIndex = i;
 	    for(int j= i;j<length;j++){
-		System.out.println(data[j]);
 		if(data[j].compareTo(data[minIndex]) < 0){
 		    minIndex =j;
 		}
@@ -117,8 +116,22 @@ public class Sarray {
 	    data[i] = n;
 	}
     }
+   
     
-    
+    /*
+      -----------------------------Questions----------------------------
+      n = # of elements
+       Insertion sort will loop n^2 times in the worst case, though it can 
+      do as few as n+1, assuming the list is unsorted. Or n if sorted.
+       The selection sort always has to loop n^2 times because it must compare
+      every element and find a new minimum every time no matter how much of
+      the list is already sorted.
+       Comparing based on method, the two sorts are very similar, involving
+      nested loops and switching the location of elements. However, based on
+      time the insertion sort is more likely to be faster, though there is a
+      chance that both will take the same amount of time.
+    */
+
 /*------------ Main -------------*/
     public static void main(String[] args) {
 	Sarray s = new Sarray();
