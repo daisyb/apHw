@@ -6,9 +6,10 @@ public class Driver{
 	Oa.add("ate");
 	Oa.add("dog");
 	Oa.add("rabbit");
-	Oa.set("cat");
 	System.out.println(Oa);
-	Oa.add("fish");
+	Oa.set(1,"cat");
+	System.out.println(Oa);
+	Oa.add("rat");
 	System.out.println(Oa);
     }
 }
