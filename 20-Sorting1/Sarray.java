@@ -91,11 +91,10 @@ public class Sarray {
     
     public void isort() {
 	String n;
+	int i;
 	for(int j = 0; j <length;j++){
-	    n =remove(j);
-	    length+=1;
-	    int i;
-	    for (i = length -1; i > 0 && n.compareTo(data[i-1]) < 0; i--) {
+	    n = data[j];
+	    for (i = j; i > 0 && n.compareTo(data[i-1]) < 0; i--) {
 		data[i] = data[i - 1];
 	    }
 	    data[i] = n;
@@ -105,7 +104,6 @@ public class Sarray {
     }
 
     public void Ssort(){
-	//int minIndex = data[0];
 	for(int i =0;i<data.length;i++){
 	    int minIndex = i;
 	    for(int j= i;j<length;j++){
@@ -132,7 +130,7 @@ public class Sarray {
 	s.add("Cucumber");
 	s.add("date");
 	System.out.println(s);
-	s.Ssort();
+	s.isort();
 	System.out.println(s);
     }
 }
