@@ -103,18 +103,36 @@ public class Sarray {
 
 
     }
+
+    public void Ssort(){
+	//int minIndex = data[0];
+	for(int i =0;i<data.length;i++){
+	    int minIndex = i;
+	    for(int j= i;j<length;j++){
+		System.out.println(data[j]);
+		if(data[j].compareTo(data[minIndex]) < 0){
+		    minIndex =j;
+		}
+	    }
+	    String n = data[minIndex];
+	    data[minIndex] = data[i];
+	    data[i] = n;
+	}
+    }
     
     
 /*------------ Main -------------*/
     public static void main(String[] args) {
 	Sarray s = new Sarray();
 	s.add("eggplant");
+	s.add("fig");
 	s.add("banana");
 	s.add("apple");
 	s.add("coconut");
+	s.add("Cucumber");
 	s.add("date");
 	System.out.println(s);
-	s.isort();
+	s.Ssort();
 	System.out.println(s);
     }
 }
