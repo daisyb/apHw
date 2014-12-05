@@ -104,7 +104,7 @@ public class Sarray {
     }
 
     public void Ssort(){
-	for(int i =0;i<data.length;i++){
+	for(int i =0;i<length;i++){
 	    int minIndex = i;
 	    for(int j= i;j<length;j++){
 		if(data[j].compareTo(data[minIndex]) < 0){
@@ -117,6 +117,18 @@ public class Sarray {
 	}
     }
    
+     public void bsort(){
+	 String n;
+	 for(int j=0;j<length;j++){
+	     for(int i =0;i+1<length;i++){
+		 if(data[i].compareTo(data[i+1]) > 0){
+		     n = data[i];
+		     data[i] = data[i+1];
+		     data[i+1] = n;
+		 }
+	     }
+	 }
+     }
     
     /*
       -----------------------------Questions----------------------------
@@ -130,20 +142,23 @@ public class Sarray {
       nested loops and switching the location of elements. However, based on
       time the insertion sort is more likely to be faster, though there is a
       chance that both will take the same amount of time.
+       Bubble sort also loops through n^2 times.
     */
 
 /*------------ Main -------------*/
     public static void main(String[] args) {
 	Sarray s = new Sarray();
-	s.add("eggplant");
-	s.add("fig");
+
+	s.add("Cucumber");
 	s.add("banana");
 	s.add("apple");
+	s.add("fig");
 	s.add("coconut");
-	s.add("Cucumber");
+	s.add("eggplant");
 	s.add("date");
+       
 	System.out.println(s);
-	s.isort();
+	s.bsort();
 	System.out.println(s);
     }
 }
