@@ -2,7 +2,7 @@ import java.util.*;
 public class Interval{
     private int[] interval = new int[2];
     private Random rnd = new Random(); 
-   private int low, high;
+    private int low, high;
  
     public Interval(int l, int h){
 	low = l;
