@@ -1,4 +1,4 @@
-public class Mage extends Basechar{
+public class Mage extends Basechar {
     private int magic = randomValue(10,21);
     private int manna = 25;
     
