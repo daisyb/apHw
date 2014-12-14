@@ -1,6 +1,0 @@
-public class Search{
-    
-    public comparable lsearch(comparable[] a, comparable value){
-	return value;
-    }
-}
