@@ -1,0 +1,30 @@
+Project:
+
+https://github.com/caitlinstanton/finalproject
+
+PONG.pde
+
+lines    comments
+
+7-8    variable names are unclear, I'm not really sure what dx and dy are used for
+
+19-22     comment the paddleUp/Down declarations, it's easy to figure out what they mean after you look at the key methods
+
+   but the two are far enough away that some preliminary warning would be nice.
+
+30-36    comment the circle stuff so It's more clear why you have a bunch of circle variables
+
+38-40    Maybe move these declarations somewhere else so that you can easily see how the circle variables and setup() connect
+
+Overall
+
+It is confusing how the abbreviations p1 and p2 are used to represent both player 1/2 in the score variables(26-27)
+
+and paddle 1/2 in the edge variables(95-101)
+
+Where you do put comments it's very helpful but a few more would definitely increase your code's readability.
+
+Especially before methods and blocks of if statements
+
+For the most part your variables are well named, except for the ones I already mentioned.
+
